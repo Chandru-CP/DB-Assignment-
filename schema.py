@@ -1,6 +1,6 @@
 from django.db import models
 
-class ProductCategory(models.Model):
+class Product_Category(models.Model):
     id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=100)
     desc = models.TextField()
@@ -24,7 +24,7 @@ class Discount(models.Model):
     def __str__(self):
         return self.name
 
-class ProductInventory(models.Model):
+class Product_Inventory(models.Model):
     id = models.AutoField(primary_key=True)
     quantity = models.IntegerField()
     created_at = models.DateTimeField(auto_now_add=True)
@@ -39,9 +39,9 @@ class Product(models.Model):
     name = models.CharField(max_length=100)
     desc = models.TextField()
     SKU = models.CharField(max_length=50)
-    category_id = models.ForeignKey(ProductCategory, on_delete=models.CASCADE,null=False)  # Many-to-one relationship with ProductCategory
-    inventory_id = models.OneToOneField(ProductInventory, on_delete=models.CASCADE,null=False)  # One-to-one relationship with ProductInventory
-    price = models.DecimalField(max_digits=10, decimal_places=3)
+    category_id = models.ForeignKey(Product_Category, on_delete=models.CASCADE,null=False)  # Many-to-one relationship with ProductCategory
+    inventory_id = models.OneToOneField(Product_Inventory, on_delete=models.CASCADE,null=False)  # One-to-one relationship with ProductInventory
+    price = models.DecimalField(max_digits=5, decimal_places=3)
     discount_id = models.ForeignKey(Discount, on_delete=models.CASCADE,null=False)  # Many-to-one relationship with Discount
     created_at = models.DateTimeField(auto_now_add=True)
     modified_at = models.DateTimeField(auto_now=True)
